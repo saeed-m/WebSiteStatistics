@@ -44,6 +44,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
       <Private>True</Private>
@@ -124,21 +132,245 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\BlockedIpViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\font-awesome.css" />
+    <Content Include="Content\font-awesome.min.css" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\Images\bg.jpg" />
+    <Content Include="Content\Images\flags\ad.png" />
+    <Content Include="Content\Images\flags\ae.png" />
+    <Content Include="Content\Images\flags\af.png" />
+    <Content Include="Content\Images\flags\ag.png" />
+    <Content Include="Content\Images\flags\al.png" />
+    <Content Include="Content\Images\flags\am.png" />
+    <Content Include="Content\Images\flags\ao.png" />
+    <Content Include="Content\Images\flags\ar.png" />
+    <Content Include="Content\Images\flags\at.png" />
+    <Content Include="Content\Images\flags\au.png" />
+    <Content Include="Content\Images\flags\az.png" />
+    <Content Include="Content\Images\flags\ba.png" />
+    <Content Include="Content\Images\flags\bb.png" />
+    <Content Include="Content\Images\flags\bd.png" />
+    <Content Include="Content\Images\flags\be.png" />
+    <Content Include="Content\Images\flags\bf.png" />
+    <Content Include="Content\Images\flags\bg.png" />
+    <Content Include="Content\Images\flags\bh.png" />
+    <Content Include="Content\Images\flags\bi.png" />
+    <Content Include="Content\Images\flags\bj.png" />
+    <Content Include="Content\Images\flags\bn.png" />
+    <Content Include="Content\Images\flags\bo.png" />
+    <Content Include="Content\Images\flags\br.png" />
+    <Content Include="Content\Images\flags\bs.png" />
+    <Content Include="Content\Images\flags\bt.png" />
+    <Content Include="Content\Images\flags\bw.png" />
+    <Content Include="Content\Images\flags\by.png" />
+    <Content Include="Content\Images\flags\bz.png" />
+    <Content Include="Content\Images\flags\ca.png" />
+    <Content Include="Content\Images\flags\cd.png" />
+    <Content Include="Content\Images\flags\cf.png" />
+    <Content Include="Content\Images\flags\cg.png" />
+    <Content Include="Content\Images\flags\ch.png" />
+    <Content Include="Content\Images\flags\ci.png" />
+    <Content Include="Content\Images\flags\cl.png" />
+    <Content Include="Content\Images\flags\cm.png" />
+    <Content Include="Content\Images\flags\cn.png" />
+    <Content Include="Content\Images\flags\co.png" />
+    <Content Include="Content\Images\flags\cr.png" />
+    <Content Include="Content\Images\flags\cu.png" />
+    <Content Include="Content\Images\flags\cv.png" />
+    <Content Include="Content\Images\flags\cy.png" />
+    <Content Include="Content\Images\flags\cz.png" />
+    <Content Include="Content\Images\flags\de.png" />
+    <Content Include="Content\Images\flags\dj.png" />
+    <Content Include="Content\Images\flags\dk.png" />
+    <Content Include="Content\Images\flags\dm.png" />
+    <Content Include="Content\Images\flags\do.png" />
+    <Content Include="Content\Images\flags\dz.png" />
+    <Content Include="Content\Images\flags\ec.png" />
+    <Content Include="Content\Images\flags\ee.png" />
+    <Content Include="Content\Images\flags\eg.png" />
+    <Content Include="Content\Images\flags\eh.png" />
+    <Content Include="Content\Images\flags\er.png" />
+    <Content Include="Content\Images\flags\es.png" />
+    <Content Include="Content\Images\flags\et.png" />
+    <Content Include="Content\Images\flags\fi.png" />
+    <Content Include="Content\Images\flags\fj.png" />
+    <Content Include="Content\Images\flags\fm.png" />
+    <Content Include="Content\Images\flags\fr.png" />
+    <Content Include="Content\Images\flags\ga.png" />
+    <Content Include="Content\Images\flags\gb.png" />
+    <Content Include="Content\Images\flags\gd.png" />
+    <Content Include="Content\Images\flags\ge.png" />
+    <Content Include="Content\Images\flags\gh.png" />
+    <Content Include="Content\Images\flags\gm.png" />
+    <Content Include="Content\Images\flags\gn.png" />
+    <Content Include="Content\Images\flags\gq.png" />
+    <Content Include="Content\Images\flags\gr.png" />
+    <Content Include="Content\Images\flags\gt.png" />
+    <Content Include="Content\Images\flags\gw.png" />
+    <Content Include="Content\Images\flags\gy.png" />
+    <Content Include="Content\Images\flags\hn.png" />
+    <Content Include="Content\Images\flags\hr.png" />
+    <Content Include="Content\Images\flags\ht.png" />
+    <Content Include="Content\Images\flags\hu.png" />
+    <Content Include="Content\Images\flags\id.png" />
+    <Content Include="Content\Images\flags\ie.png" />
+    <Content Include="Content\Images\flags\il.png" />
+    <Content Include="Content\Images\flags\in.png" />
+    <Content Include="Content\Images\flags\iq.png" />
+    <Content Include="Content\Images\flags\ir.png" />
+    <Content Include="Content\Images\flags\is.png" />
+    <Content Include="Content\Images\flags\it.png" />
+    <Content Include="Content\Images\flags\jm.png" />
+    <Content Include="Content\Images\flags\jo.png" />
+    <Content Include="Content\Images\flags\jp.png" />
+    <Content Include="Content\Images\flags\ke.png" />
+    <Content Include="Content\Images\flags\kg.png" />
+    <Content Include="Content\Images\flags\kh.png" />
+    <Content Include="Content\Images\flags\ki.png" />
+    <Content Include="Content\Images\flags\km.png" />
+    <Content Include="Content\Images\flags\kn.png" />
+    <Content Include="Content\Images\flags\kp.png" />
+    <Content Include="Content\Images\flags\kr.png" />
+    <Content Include="Content\Images\flags\ks.png" />
+    <Content Include="Content\Images\flags\kw.png" />
+    <Content Include="Content\Images\flags\kz.png" />
+    <Content Include="Content\Images\flags\la.png" />
+    <Content Include="Content\Images\flags\lb.png" />
+    <Content Include="Content\Images\flags\lc.png" />
+    <Content Include="Content\Images\flags\li.png" />
+    <Content Include="Content\Images\flags\lk.png" />
+    <Content Include="Content\Images\flags\lr.png" />
+    <Content Include="Content\Images\flags\ls.png" />
+    <Content Include="Content\Images\flags\lt.png" />
+    <Content Include="Content\Images\flags\lu.png" />
+    <Content Include="Content\Images\flags\lv.png" />
+    <Content Include="Content\Images\flags\ly.png" />
+    <Content Include="Content\Images\flags\ma.png" />
+    <Content Include="Content\Images\flags\mc.png" />
+    <Content Include="Content\Images\flags\md.png" />
+    <Content Include="Content\Images\flags\me.png" />
+    <Content Include="Content\Images\flags\mg.png" />
+    <Content Include="Content\Images\flags\mh.png" />
+    <Content Include="Content\Images\flags\mk.png" />
+    <Content Include="Content\Images\flags\ml.png" />
+    <Content Include="Content\Images\flags\mm.png" />
+    <Content Include="Content\Images\flags\mn.png" />
+    <Content Include="Content\Images\flags\mr.png" />
+    <Content Include="Content\Images\flags\mt.png" />
+    <Content Include="Content\Images\flags\mu.png" />
+    <Content Include="Content\Images\flags\mv.png" />
+    <Content Include="Content\Images\flags\mw.png" />
+    <Content Include="Content\Images\flags\mx.png" />
+    <Content Include="Content\Images\flags\my.png" />
+    <Content Include="Content\Images\flags\mz.png" />
+    <Content Include="Content\Images\flags\na.png" />
+    <Content Include="Content\Images\flags\ne.png" />
+    <Content Include="Content\Images\flags\ng.png" />
+    <Content Include="Content\Images\flags\ni.png" />
+    <Content Include="Content\Images\flags\nl.png" />
+    <Content Include="Content\Images\flags\no.png" />
+    <Content Include="Content\Images\flags\np.png" />
+    <Content Include="Content\Images\flags\nr.png" />
+    <Content Include="Content\Images\flags\nz.png" />
+    <Content Include="Content\Images\flags\om.png" />
+    <Content Include="Content\Images\flags\pa.png" />
+    <Content Include="Content\Images\flags\pe.png" />
+    <Content Include="Content\Images\flags\pg.png" />
+    <Content Include="Content\Images\flags\ph.png" />
+    <Content Include="Content\Images\flags\pk.png" />
+    <Content Include="Content\Images\flags\pl.png" />
+    <Content Include="Content\Images\flags\pt.png" />
+    <Content Include="Content\Images\flags\pw.png" />
+    <Content Include="Content\Images\flags\py.png" />
+    <Content Include="Content\Images\flags\qa.png" />
+    <Content Include="Content\Images\flags\ro.png" />
+    <Content Include="Content\Images\flags\rs.png" />
+    <Content Include="Content\Images\flags\ru.png" />
+    <Content Include="Content\Images\flags\rw.png" />
+    <Content Include="Content\Images\flags\sa.png" />
+    <Content Include="Content\Images\flags\sb.png" />
+    <Content Include="Content\Images\flags\sc.png" />
+    <Content Include="Content\Images\flags\sd.png" />
+    <Content Include="Content\Images\flags\se.png" />
+    <Content Include="Content\Images\flags\sg.png" />
+    <Content Include="Content\Images\flags\si.png" />
+    <Content Include="Content\Images\flags\sk.png" />
+    <Content Include="Content\Images\flags\sl.png" />
+    <Content Include="Content\Images\flags\sm.png" />
+    <Content Include="Content\Images\flags\sn.png" />
+    <Content Include="Content\Images\flags\so.png" />
+    <Content Include="Content\Images\flags\sr.png" />
+    <Content Include="Content\Images\flags\st.png" />
+    <Content Include="Content\Images\flags\sv.png" />
+    <Content Include="Content\Images\flags\sy.png" />
+    <Content Include="Content\Images\flags\sz.png" />
+    <Content Include="Content\Images\flags\td.png" />
+    <Content Include="Content\Images\flags\tg.png" />
+    <Content Include="Content\Images\flags\th.png" />
+    <Content Include="Content\Images\flags\tj.png" />
+    <Content Include="Content\Images\flags\tl.png" />
+    <Content Include="Content\Images\flags\tm.png" />
+    <Content Include="Content\Images\flags\tn.png" />
+    <Content Include="Content\Images\flags\to.png" />
+    <Content Include="Content\Images\flags\tr.png" />
+    <Content Include="Content\Images\flags\tt.png" />
+    <Content Include="Content\Images\flags\tv.png" />
+    <Content Include="Content\Images\flags\tw.png" />
+    <Content Include="Content\Images\flags\tz.png" />
+    <Content Include="Content\Images\flags\ua.png" />
+    <Content Include="Content\Images\flags\ug.png" />
+    <Content Include="Content\Images\flags\us.png" />
+    <Content Include="Content\Images\flags\uy.png" />
+    <Content Include="Content\Images\flags\uz.png" />
+    <Content Include="Content\Images\flags\va.png" />
+    <Content Include="Content\Images\flags\vc.png" />
+    <Content Include="Content\Images\flags\ve.png" />
+    <Content Include="Content\Images\flags\vn.png" />
+    <Content Include="Content\Images\flags\vu.png" />
+    <Content Include="Content\Images\flags\ws.png" />
+    <Content Include="Content\Images\flags\ye.png" />
+    <Content Include="Content\Images\flags\za.png" />
+    <Content Include="Content\Images\flags\zm.png" />
+    <Content Include="Content\Images\flags\zw.png" />
     <Content Include="favicon.ico" />
+    <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\bootstrap.min.js.map" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="fonts\FontAwesome.otf" />
+    <Content Include="fonts\fontawesome-webfont.woff2" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome-webfont.eot" />
+    <Content Include="Content\fonts\Vazir-Bold-FD.eot" />
+    <Content Include="Content\fonts\Vazir-Bold-FD.ttf" />
+    <Content Include="Content\fonts\Vazir-Bold-FD.woff" />
+    <Content Include="Content\fonts\Vazir-FD.eot" />
+    <Content Include="Content\fonts\Vazir-FD.ttf" />
+    <Content Include="Content\fonts\Vazir-FD.woff" />
+    <Content Include="Content\fonts\Vazir-Light-FD.eot" />
+    <Content Include="Content\fonts\Vazir-Light-FD.ttf" />
+    <Content Include="Content\fonts\Vazir-Light-FD.woff" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\canvasjs.min.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery-3.1.0.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -146,6 +378,7 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\script.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -158,21 +391,31 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\Table.cshtml" />
+    <Content Include="Views\Home\Chart.cshtml" />
+    <Content Include="Views\Home\Map.cshtml" />
+    <Content Include="Views\Home\BlockeIps.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
-    <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DataLayer\DataLayer.csproj">
+      <Project>{839a4892-52cc-4f9a-b3ed-0b4edb7e59c3}</Project>
+      <Name>DataLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DomainClasses\DomainClasses.csproj">
+      <Project>{dc442c53-a6e7-4c87-b9eb-c2a7a690621f}</Project>
+      <Name>DomainClasses</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -192,7 +435,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>33472</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:33472/</IISUrl>
+          <IISUrl>http://localhost:36898/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

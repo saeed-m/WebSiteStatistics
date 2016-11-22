@@ -1,0 +1,58 @@
+﻿@model IEnumerable<DomainClasses.Entities.Country>
+
+<script src="~/Scripts/jquery-3.1.0.min.js"></script>
+<script src="http://canvasjs.com/assets/script/canvasjs.min.js"></script>
+<script src="~/Scripts/script.js"></script>
+<div class="row">
+
+    <div class="col-md-12">
+
+        <div class="box">
+            <div class="box-header">
+                <span>
+                    <span class="imgleft fa fa-bar-chart" aria-hidden="true"></span>
+                    نمایش آمار بازدیدها به تفکیک کشور
+                </span>
+
+            </div>
+            <div class="box-content">
+                <div id="chart">
+                    <ul id="numbers">
+                        <li><span>100%</span></li>
+                        <li><span>90%</span></li>
+                        <li><span>80%</span></li>
+                        <li><span>70%</span></li>
+                        <li><span>60%</span></li>
+                        <li><span>50%</span></li>
+                        <li><span>40%</span></li>
+                        <li><span>30%</span></li>
+                        <li><span>20%</span></li>
+                        <li><span>10%</span></li>
+                        <li><span>0%</span></li>
+                    </ul>
+                    <ul id="bars">
+                        @{
+
+                            foreach (var country in Model)
+                            {
+                                <li>
+                                    <div data-percentage="@country.ViewCount" class="bar"></div><span>@country.CountryName</span>
+                                </li>
+
+                            }
+
+                        }
+
+                    </ul>
+                </div>
+                
+                </div>
+
+
+
+        </div>
+
+
+    </div>
+
+</div>

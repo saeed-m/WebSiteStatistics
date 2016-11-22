@@ -1,0 +1,58 @@
+﻿@model IEnumerable<DomainClasses.Entities.Country>
+
+
+<div class="row">
+
+    <div class="col-md-12">
+
+        <div class="box">
+            <div class="box-header">
+                <span>
+                    <span class="imgleft fa fa-table" aria-hidden="true"></span>
+                    نمایش آمار بازدیدها به تفکیک کشور
+                </span>
+
+            </div>
+            <div class="box-content">
+                <div class="table-responsive">
+                    <table class="table table-hover table-bordered">
+                        <thead>
+                            <tr>
+                                <th><span class="fa fa-flag-checkered" aria-hidden="true"></span></th>
+                                <th>نام کشور</th>
+                                <th>تعداد بازدید</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            @{
+                                foreach (var country in Model)
+                                {
+                                    var flag = $"../Content/Images/flags/{country.CountryCode}.png";
+                                    <tr>
+                                        <td><img src="@flag" style="width: 35px; height: 20px" /></td>
+                                        <td>@country.CountryName</td>
+                                        <td><span class="badge">@country.ViewCount</span></td>
+                                    </tr>
+
+                                }
+
+                            }
+
+                            </tbody>
+                    </table>
+
+                </div>
+
+
+            </div>
+
+
+
+        </div>
+
+
+    </div>
+
+</div>
