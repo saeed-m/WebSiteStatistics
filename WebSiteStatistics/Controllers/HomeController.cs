@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Mime;
 using System.Web;
 using System.Web.Mvc;
 using DataLayer.DbContext;
@@ -14,9 +15,23 @@ namespace WebSiteStatistics.Controllers
     {
         public ActionResult Index()
         {
+            IList<Statistics> stat=new List<Statistics>();
+            using (var db=new AppDbContext())
+            {
+                stat=db.Statisticses.AsNoTracking().ToList();
+            }
 
+            StatisticsViewModel svm=new StatisticsViewModel()
+            {
+                OnlineUsers =(int)HttpContext.Application["OnlineUsersCount"],
+                TodayVisits = stat.Count(ss => ss.DateStamp.Day == DateTime.Now.Day),
+                TotallVisits = stat.Count,
+                UniquVisitors = stat.GroupBy(ta => ta.IpAddress).Select(ta => ta.Key).Count()
 
-            return View();
+        };
+        
+
+            return View(svm);
         }
 
         public ActionResult Table()

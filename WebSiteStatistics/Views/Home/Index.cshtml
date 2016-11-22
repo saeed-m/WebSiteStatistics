@@ -1,5 +1,5 @@
 ﻿
-
+@model WebSiteStatistics.Models.StatisticsViewModel
 
 <div class="row">
 
@@ -9,47 +9,252 @@
             <div class="box-header">
                 <span>
                     <span class="imgleft fa fa-table" aria-hidden="true"></span>
-                    نمایش آمار بازدیدها به تفکیک کشور
+                    نمایش آمار کلی
                 </span>
 
             </div>
             <div class="box-content">
                 <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <div class="HitBoxgreen">
 
                             <div class="text-center top10">
                                 <span class="fa fa-users fa-3x" style="color: #fff"></span>
                                 <h4>افراد آنلاین</h4>
-                                <span> 125 نفر</span>
+                                <span> @Model.OnlineUsers نفر</span>
                             </div>
 
                         </div>
 
 
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-3">
 
                         <div class="HitBoxRed">
 
                             <div class="text-center top10">
                                 <span class="fa fa-eye fa-3x" style="color: #fff"></span>
                                 <h4>بازدید امروز</h4>
-                                <span> 125 نفر</span>
+                                <span> @Model.TodayVisits نفر</span>
                             </div>
 
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <div class="HitBoxBlue">
 
                             <div class="text-center top10">
                                 <span class="fa fa-eye fa-3x" style="color: #fff"></span>
-                                <h4>بازدید امروز</h4>
-                                <span> 125 نفر</span>
+                                <h4>بازدید یونیک</h4>
+                                <span> @Model.UniquVisitors نفر</span>
                             </div>
 
                         </div>
+
+                    </div>
+                    <div class="col-md-3">
+                        <div class="HitBoxBlue">
+
+                            <div class="text-center top10">
+                                <span class="fa fa-eye fa-3x" style="color: #fff"></span>
+                                <h4>بازدید کل</h4>
+                                <span> @Model.TotallVisits نفر</span>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="row top20">
+                    <div class="col-md-6">
+                        <div class="table-responsive">
+
+                            <table class="table m-0">
+
+                                <tbody>
+
+                                    <tr>
+                                        <td>1</td>
+                                        <td>
+                                            <i class="fa fa-chrome fa-2x" style="color: lightblue" aria-hidden="true"></i>
+                                        </td>
+                                        <td>کروم</td>
+                                        <td>12</td>
+                                        <td>
+                                            <div class="progress-bar progress-bar-striped active" role="progressbar"
+                                                 aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
+                                                40%
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>
+                                            <i class="fa fa-internet-explorer fa-2x" style="color: lightblue" aria-hidden="true"></i>
+
+                                        </td>
+                                        <td>اینترنت اکسپلپورر</td>
+                                        <td>12</td>
+                                        <td>
+                                            <div class="progress-bar progress-bar-striped active" role="progressbar"
+                                                 aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                                                100%
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>
+                                            <i class="fa fa-firefox fa-2x" style="color: lightblue" aria-hidden="true"></i>
+
+                                        </td>
+                                        <td>فایرفاکس</td>
+                                        <td>12</td>
+                                        <td>
+                                            <div class="progress-bar progress-bar-striped active" role="progressbar"
+                                                 aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
+                                                40%
+                                            </div>
+                                        </td>
+                                    </tr>
+                                <tr>
+                                    <td>1</td>
+                                    <td>
+                                        <i class="fa  fa-edge fa-2x" style="color: lightblue" aria-hidden="true"></i>
+
+                                    </td>
+                                    <td>ادج</td>
+                                    <td>12</td>
+                                    <td>
+                                        <div class="progress-bar progress-bar-striped active" role="progressbar"
+                                             aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
+                                            40%
+                                        </div>
+                                    </td>
+                                </tr>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>
+                                            <i class="fa  fa-safari fa-2x" style="color: lightblue" aria-hidden="true"></i>
+
+                                        </td>
+                                        <td>سافاری</td>
+                                        <td>12</td>
+                                        <td>
+                                            <div class="progress-bar progress-bar-striped active" role="progressbar"
+                                                 aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%">
+                                                20%
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+
+                            </table>
+
+                        </div>
+
+
+
+
+
+
+
+
+                    </div>
+                    <div class="col-md-6">
+                        <div class="table-responsive">
+
+                            <table class="table m-0">
+
+                                <tbody>
+
+                                    <tr>
+                                        <td>1</td>
+                                        <td>
+                                            <i class="fa fa-windows fa-2x" style="color: lightblue" aria-hidden="true"></i>
+                                        </td>
+                                        <td>کروم</td>
+                                        <td>12</td>
+                                        <td>
+                                            <div class="progress-bar progress-bar-striped active" role="progressbar"
+                                                 aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
+                                                40%
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>
+                                            <i class="fa fa-linux fa-2x" style="color: lightblue" aria-hidden="true"></i>
+
+                                        </td>
+                                        <td>اینترنت اکسپلپورر</td>
+                                        <td>12</td>
+                                        <td>
+                                            <div class="progress-bar progress-bar-striped active" role="progressbar"
+                                                 aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                                                100%
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>
+                                            <i class="fa fa-apple fa-2x" style="color: lightblue" aria-hidden="true"></i>
+
+                                        </td>
+                                        <td>فایرفاکس</td>
+                                        <td>12</td>
+                                        <td>
+                                            <div class="progress-bar progress-bar-striped active" role="progressbar"
+                                                 aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
+                                                40%
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>
+                                            <i class="fa  fa-android fa-2x" style="color: lightblue" aria-hidden="true"></i>
+
+                                        </td>
+                                        <td>ادج</td>
+                                        <td>12</td>
+                                        <td>
+                                            <div class="progress-bar progress-bar-striped active" role="progressbar"
+                                                 aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
+                                                40%
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>
+                                            <i class="fa  fa-safari fa-2x" style="color: lightblue" aria-hidden="true"></i>
+
+                                        </td>
+                                        <td>سافاری</td>
+                                        <td>12</td>
+                                        <td>
+                                            <div class="progress-bar progress-bar-striped active" role="progressbar"
+                                                 aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%">
+                                                20%
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+
+                            </table>
+
+                        </div>
+
+
+
+
+
+
+
 
                     </div>
 

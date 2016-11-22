@@ -214,4 +214,18 @@ body {
     .top10 {
         padding-top: 10px;
     }
-   
+   /*Progress*/
+   .progress {
+       margin-top: 15px;
+        height: 40px;
+
+   }
+   .m-0 {
+       margin: 0 !important;
+   }
+   .table-no-border {
+       border: none!important;
+   }
+   .top20 {
+       margin-top: 20px;
+   }
