@@ -369,6 +369,7 @@
     <Content Include="Content\fonts\Vazir-Light-FD.eot" />
     <Content Include="Content\fonts\Vazir-Light-FD.ttf" />
     <Content Include="Content\fonts\Vazir-Light-FD.woff" />
+    <None Include="Properties\PublishProfiles\pub01.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\canvasjs.min.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />

@@ -71,19 +71,7 @@ namespace WebSiteStatistics
                 }
                 //بدست آوردن کشور بازدید کننده
                 XDocument xdoc = XDocument.Load("http://www.freegeoip.net/xml/" + GetIPAddress());
-                string checkfornull = string.Empty;
-                var countryCo = xdoc.Descendants("Response").Select(c => new
-                {
-
-                    checkfornull = c.Element("CountryCode")?.Value
-                });
-
-                if (!string.IsNullOrEmpty(checkfornull))
-                {
-
-
-
-                    var country = xdoc.Descendants("Response").Select(c => new
+                var country = xdoc.Descendants("Response").Select(c => new
                     {
                         IpAddress = c.Element("IP")?.Value,
                         CountryCode = c.Element("CountryCode")?.Value,
@@ -126,7 +114,7 @@ namespace WebSiteStatistics
                         }
                     }
 
-                }
+                
             }
             Application.UnLock();
 
