@@ -18,7 +18,7 @@ namespace WebSiteStatistics.Controllers
             IList<Statistics> stat=new List<Statistics>();
             using (var db=new AppDbContext())
             {
-                stat=db.Statisticses.AsNoTracking().ToList();
+                stat=db.Statisticses.ToList();
             }
 
             StatisticsViewModel svm=new StatisticsViewModel()
@@ -26,12 +26,30 @@ namespace WebSiteStatistics.Controllers
                 OnlineUsers =(int)HttpContext.Application["OnlineUsersCount"],
                 TodayVisits = stat.Count(ss => ss.DateStamp.Day == DateTime.Now.Day),
                 TotallVisits = stat.Count,
-                UniquVisitors = stat.GroupBy(ta => ta.IpAddress).Select(ta => ta.Key).Count()
-
-        };
-        
+                UniquVisitors = stat.GroupBy(ta => ta.IpAddress).Select(ta => ta.Key).Count(),
+                Chrome =stat.Count(x => x.UserAgent == "Chrome"),
+                InternetExplorer =stat.Count(x => x.UserAgent == "IE"),
+                FireFox =stat.Count(x => x.UserAgent == "Firefox" || x.UserAgent == "Mozilla"),
+                Safari = stat.Count(x => x.UserAgent == "Safari"),
+                OtherBrowsers =stat.Count(x => x.UserAgent == "Unknown"),
+                //os
+                Windows = stat.Count(x => x.UserOs.Contains("Windows")),
+                Android = stat.Count(x => x.UserOs == "Android"),
+                OtherOs = stat.Count(x => x.UserOs == "Other"),
+                Linux = stat.Count(x => x.UserOs == "Linux"),
+                Ios = stat.Count(x => x.UserOs == "iOS"),
+                Mac = stat.Count(x => x.UserOs == "Mac"),
+            };
+            
 
             return View(svm);
+        }
+
+        public int calculatePercentage(int CurrentValue, int totallValue)
+        {
+
+            return (int)CurrentValue*100/totallValue;
+
         }
 
         public ActionResult Table()

@@ -3,19 +3,10 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>@ViewBag.Title - WebSiteStatistics-CssPro.Ir</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
-    @*<link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
-    <link href="~/Content/font-awesome.min.css" rel="stylesheet" type="text/css" />
-    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />*@
-
-    <!-- scripts -->
-    @*<script src="~/Scripts/modernizr-2.6.2.js"></script>
-    <script src="~/Scripts/jquery-3.1.0.min.js"></script>
-    <script src="~/Scripts/bootstrap.min.js"></script>
-    <script src="http://canvasjs.com/assets/script/canvasjs.min.js"></script>*@
 
 </head>
 <body>
@@ -35,10 +26,10 @@
                 <div class="box-content">
 
                     <div class="list-group">
-                        <a href="@Url.Action("Table","Home")" class="list-group-item"><span class="pull-left fa fa-table" aria-hidden="true"></span>جدول</a>
+                        <a href="@Url.Action("Index", "Home")" class="list-group-item">صفحه اصلی<span class="pull-left fa fa-eye" aria-hidden="true"></span></a>
+                        <a href="@Url.Action("Table","Home")" class="list-group-item"><span class="pull-left fa fa-table" aria-hidden="true"></span>به تفکیک کشور</a>
                         <a href="@Url.Action("Chart","Home")" class="list-group-item"><span class="pull-left fa fa-bar-chart" aria-hidden="true"></span>نمودار</a>
                         <a href="@Url.Action("Map","Home")" class="list-group-item">روی نقشه<span class="pull-left fa fa-map" aria-hidden="true"></span></a>
-                        <a href="@Url.Action("Index", "Home")" class="list-group-item">بازدیدها<span class="pull-left fa fa-eye" aria-hidden="true"></span></a>
                         <a href="@Url.Action("BlockeIps","Home")" class="list-group-item">تنظیمات<span class="pull-left fa fa-cogs" aria-hidden="true"></span></a>
                     </div>
 
