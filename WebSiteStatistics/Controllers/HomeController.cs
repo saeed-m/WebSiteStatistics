@@ -65,12 +65,26 @@ namespace WebSiteStatistics.Controllers
         }
         public ActionResult Chart()
         {
+            IList<CountryViewModel> cvm=new List<CountryViewModel>();
             using (var db = new AppDbContext())
             {
-
+                
                 var countries = db.Countries.AsNoTracking().ToList();
+                int totalvisits= countries.Sum(country => country.ViewCount);
+                foreach (var country in countries)
+                {
 
-                return View(countries);
+                   cvm.Add(new CountryViewModel()
+                    {
+                        ViewCount = country.ViewCount,
+                        CountryName = country.CountryName,
+                        TotalVisits = totalvisits,
+                        Percentage = country.ViewCount*100/totalvisits
+                        
+                    });
+                }
+                
+                return View(cvm);
             }
         }
         public ActionResult Map()

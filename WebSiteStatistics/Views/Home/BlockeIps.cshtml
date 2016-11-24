@@ -12,7 +12,7 @@
 
             </div>
             <div class="box-content">
-               
+
                 <div class="margin10">
                     @using (Html.BeginForm("AddIp", "Home", FormMethod.Post, new { @class = "form-inline" }))
                     {
@@ -31,49 +31,48 @@
 
                 </div>
 
+                <div class="table-responsive">
+                    <table class="table table-hover table-bordered">
+                        <caption>
+                            <div class="alert alert-danger alert-dismissable">
+                                <span class="fa fa-bolt"></span>
+                                <strong>توجه داشته باشید!</strong>
+                                با افزودن شماره آی پی ها به این لیست مانع از شمارش آنها در آمار خواهید شد.
 
+                            </div>
+                            @*<div class="alert alert-info alert-dismissable">
+                                <span class="fa fa-bolt"></span>
+                                <strong>توجه داشته باشید!</strong>
+                                عمل افزودن آی پی به علت دمو غیر فعال میباشد
+                            </div>*@
 
+                        </caption>
+                        <thead>
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.IpAddress)
+                                </th>
+                                <th>دستورات</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        <span class="label label-warning">
+                                            @Html.DisplayFor(modelItem => item.IpAddress)
+                                        </span>
+                                    </td>
+                                    <td>
+                                        @Html.ActionLink("حذف", "DeleteIp", new { id = item.Id }, new { @class = "btn btn-danger" })
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
 
-
-
-
-                        <div class="table-responsive">
-                            <table class="table table-hover table-bordered">
-                                <caption>
-                                    <div class="alert alert-danger alert-dismissable">
-                                        <span class="fa fa-bolt"></span>
-                                        <strong>توجه داشته باشید!</strong>
-                                        با افزودن شماره آی پی ها به این لیست مانع از شمارش آنها در آمار خواهید شد.
-
-                                    </div>
-
-                                </caption>
-                                <thead>
-                                    <tr>
-                                        <th>
-                                            @Html.DisplayNameFor(model => model.IpAddress)
-                                        </th>
-                                        <th>دستورات</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach (var item in Model)
-                                    {
-                                        <tr>
-                                            <td>
-                                                <span class="label label-warning">
-                                                    @Html.DisplayFor(modelItem => item.IpAddress)
-                                                </span>
-                                            </td>
-                                            <td>
-                                                @Html.ActionLink("حذف", "DeleteIp", new { id = item.Id }, new { @class = "btn btn-danger" })
-                                            </td>
-                                        </tr>
-                                    }
-                                </tbody>
-                            </table>
-
-                        </div>
+                </div>
 
 
             </div>

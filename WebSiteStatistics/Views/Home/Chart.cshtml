@@ -1,4 +1,4 @@
-﻿@model IEnumerable<DomainClasses.Entities.Country>
+﻿@model IEnumerable<WebSiteStatistics.Models.CountryViewModel>
 
 <script src="~/Scripts/jquery-3.1.0.min.js"></script>
 <script src="http://canvasjs.com/assets/script/canvasjs.min.js"></script>
@@ -11,7 +11,7 @@
             <div class="box-header">
                 <span>
                     <span class="imgleft fa fa-bar-chart" aria-hidden="true"></span>
-                    نمایش آمار بازدیدها به تفکیک کشور
+                    نمایش آمار بازدیدها به تفکیک کشور روی نمودار
                 </span>
 
             </div>
@@ -36,7 +36,7 @@
                             foreach (var country in Model)
                             {
                                 <li>
-                                    <div data-percentage="@country.ViewCount" class="bar"></div><span>@country.CountryName</span>
+                                    <div data-percentage="@country.Percentage" class="bar"></div><span>@country.CountryName</span>
                                 </li>
 
                             }
