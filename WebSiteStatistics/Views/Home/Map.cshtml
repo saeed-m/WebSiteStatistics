@@ -1,23 +1,18 @@
 ﻿<script src="http://maps.google.com/maps/api/js?sensor=true" type="text/javascript"></script>
 <div class="row">
-
     <div class="col-md-12">
-
         <div class="box">
             <div class="box-header">
                 <span>
                     <span class="imgleft fa fa-bar-chart" aria-hidden="true"></span>
                     نمایش آمار بازدیدها به تفکیک کشور روی نقشه
                 </span>
-
             </div>
             <div class="box-content">
 
                 <div id="map_canvas" style="height: 550px;"></div>
                 @section scripts {
-                    <section class="scripts">
-
-                        <script type="text/javascript">
+                    <script type="text/javascript">
 
 
             $(document).ready(function () {
@@ -29,7 +24,7 @@
 
                 // Google has tweaked their interface somewhat - this tells the api to use that new UI
                 google.maps.visualRefresh = true;
-                    
+
                 var iran = new google.maps.LatLng(35.6961, 51.4231);
 
                 // These are options that set initial zoom level, where the map is centered globally to start, and the type of map to show
@@ -58,11 +53,8 @@
 
                         });
 
-
-
                         // Make the marker-pin blue!
                         marker.setIcon('http://maps.google.com/mapfiles/ms/icons/blue-dot.png');
-
 
                         // put in some information about each json object - in this case, the opening hours.
                         var infowindow = new google.maps.InfoWindow({
@@ -80,8 +72,8 @@
             }
 
 
-                        </script>
-                    </section>
+                    </script>
+
                 }
 
             </div>

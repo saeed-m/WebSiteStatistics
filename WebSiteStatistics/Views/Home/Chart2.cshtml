@@ -1,0 +1,145 @@
+﻿@Styles.Render("~/Content/Chartscss")
+<div class="row">
+    <div class="col-md-6">
+
+        <div class="box">
+            <div class="box-header">
+                <span>
+                    <span class="imgleft fa fa-bar-chart" aria-hidden="true"></span>
+                    نمایش آمار بازدیدها به تفکیک سیستم عامل
+                </span>
+
+            </div>
+            <div class="box-content">
+                <div id="UserOs" style="height: 250px"></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+
+        <div class="box">
+            <div class="box-header">
+                <span>
+                    <span class="imgleft fa fa-bar-chart" aria-hidden="true"></span>
+                    نمایش آمار بازدیدها به تفکیک مرورگرها
+                </span>
+
+            </div>
+            <div class="box-content">
+                <div id="BrowserReview" style="height: 250px;"></div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<div class="row">
+    <div class="col-md-12">
+
+        <div class="box">
+            <div class="box-header">
+                <span>
+                    <span class="imgleft fa fa-bar-chart" aria-hidden="true"></span>
+                    نمایش آمار بازدیدها به تفکیک کشور روی نمودار
+                </span>
+
+            </div>
+            <div class="box-content">
+                <div id="barCountry" style="height: 250px;"></div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+@section scripts {
+    @Scripts.Render("~/bundles/Chartsjs")
+   <script>
+        $(window).load(function() {
+            var databrowser = new Array();
+            $.getJSON('/Home/RequestUserBrowserData/', function (data) {
+                $.each(data, function(i, item) {
+                    databrowser.push({ label: item.lable, value: item.value });
+                });
+                Morris.Donut({
+                    element: 'BrowserReview',
+                    data: databrowser
+                });
+
+            });
+       // Initialize Pie Chart
+
+            $.getJSON('/Home/RequestUserOsData/', function(data) {
+                var data6 = new Array();
+                $.each(data, function(i, item) {
+                    data6.push({ label: item.lable, data: item.data });
+                });
+                var options6 = {
+                    series: {
+                        pie: {
+                            show: true,
+                            innerRadius: 0,
+                            stroke: {
+                                width: 0.5
+                            },
+                            label: {
+                                show: true,
+                                threshold: 0.05
+
+                            }
+                        }
+                    },
+
+                    grid: {
+                        hoverable: true,
+                        clickable: true,
+                        borderWidth: 1,
+                        color: '#ccc'
+                    },
+                    tooltip: true,
+                    tooltipOpts: { content: '%s: %p.0%' }
+                };
+
+                var plot6 = $.plot($("#UserOs"), data6, options6);
+                $(window).resize(function() {
+                    // redraw the graph in the correctly sized div
+                    plot6.resize();
+                    plot6.setupGrid();
+                    plot6.draw();
+                });
+
+            });
+
+
+            // * Initialize Pie Chart
+            var dataCountry = new Array();
+            $.getJSON('/Home/RequestVisitorsCountryData/', function (data) {
+                $.each(data, function (i, item) {
+                    dataCountry.push({ y: item.y, a: item.a });
+                });
+                Morris.Bar({
+                    element: 'barCountry',
+                    data: dataCountry,
+                    xkey: 'y',
+                    ykeys: ['a'],
+                    labels: ['تعداد بازدید'],
+                    barColors: ['#ff4a43']
+                    
+                    
+                });
+
+            });
+           
+
+
+
+           
+
+
+        });
+
+
+    </script>
+
+
+}

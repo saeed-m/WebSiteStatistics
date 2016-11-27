@@ -137,8 +137,12 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\BlockedIpViewModel.cs" />
+    <Compile Include="Models\BrowserTableViewModel.cs" />
     <Compile Include="Models\CountryViewModel.cs" />
+    <Compile Include="Models\OsTableViewModel.cs" />
     <Compile Include="Models\StatisticsViewModel.cs" />
+    <Compile Include="Models\UserOsViewModel.cs" />
+    <Compile Include="Models\VectorMapViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -371,9 +375,16 @@
     <Content Include="Content\fonts\Vazir-Light-FD.eot" />
     <Content Include="Content\fonts\Vazir-Light-FD.ttf" />
     <Content Include="Content\fonts\Vazir-Light-FD.woff" />
+    <Content Include="App_Browsers\edge.browser" />
     <None Include="Properties\PublishProfiles\pub01.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\canvasjs.min.js" />
+    <Content Include="Scripts\flot-tooltip\jquery.flot.tooltip.min.js" />
+    <Content Include="Scripts\flot\jquery.flot.min.js" />
+    <Content Include="Scripts\flot\jquery.flot.orderBars.js" />
+    <Content Include="Scripts\flot\jquery.flot.pie.min.js" />
+    <Content Include="Scripts\flot\jquery.flot.resize.min.js" />
+    <Content Include="Scripts\flot\jquery.flot.stack.min.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -383,6 +394,11 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\morris\morris.css" />
+    <Content Include="Scripts\morris\morris.js" />
+    <Content Include="Scripts\morris\morris.min.js" />
+    <Content Include="Scripts\raphael\raphael-min.js" />
+    <Content Include="Scripts\raphael\raphael.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\script.js" />
@@ -403,6 +419,9 @@
     <Content Include="Views\Home\Chart.cshtml" />
     <Content Include="Views\Home\Map.cshtml" />
     <Content Include="Views\Home\BlockeIps.cshtml" />
+    <Content Include="Views\Home\Chart2.cshtml" />
+    <Content Include="Views\Home\_BrowserTablePartial.cshtml" />
+    <Content Include="Views\Home\_OsTablePartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
+using System.Dynamic;
 using System.Linq;
 using System.Net.Mime;
 using System.Web;
@@ -7,6 +9,7 @@ using System.Web.Mvc;
 using DataLayer.DbContext;
 using DomainClasses.Entities;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using WebSiteStatistics.Models;
 
 namespace WebSiteStatistics.Controllers
@@ -15,32 +18,22 @@ namespace WebSiteStatistics.Controllers
     {
         public ActionResult Index()
         {
-            IList<Statistics> stat=new List<Statistics>();
-            using (var db=new AppDbContext())
+
+            IList<Statistics> stat = new List<Statistics>();
+            using (var db = new AppDbContext())
             {
-                stat=db.Statisticses.ToList();
+                stat = db.Statisticses.ToList();
             }
 
-            StatisticsViewModel svm=new StatisticsViewModel()
+            StatisticsViewModel svm = new StatisticsViewModel()
             {
-                OnlineUsers =(int)HttpContext.Application["OnlineUsersCount"],
+                OnlineUsers = (int)HttpContext.Application["OnlineUsersCount"],
                 TodayVisits = stat.Count(ss => ss.DateStamp.Day == DateTime.Now.Day),
                 TotallVisits = stat.Count,
                 UniquVisitors = stat.GroupBy(ta => ta.IpAddress).Select(ta => ta.Key).Count(),
-                Chrome =stat.Count(x => x.UserAgent == "Chrome"),
-                InternetExplorer =stat.Count(x => x.UserAgent == "IE"),
-                FireFox =stat.Count(x => x.UserAgent == "Firefox" || x.UserAgent == "Mozilla"),
-                Safari = stat.Count(x => x.UserAgent == "Safari"),
-                OtherBrowsers =stat.Count(x => x.UserAgent == "Unknown"),
-                //os
-                Windows = stat.Count(x => x.UserOs.Contains("Windows")),
-                Android = stat.Count(x => x.UserOs == "Android"),
-                OtherOs = stat.Count(x => x.UserOs == "Other"),
-                Linux = stat.Count(x => x.UserOs == "Linux"),
-                Ios = stat.Count(x => x.UserOs == "iOS"),
-                Mac = stat.Count(x => x.UserOs == "Mac"),
+              
             };
-            
+
 
             return View(svm);
         }
@@ -48,7 +41,7 @@ namespace WebSiteStatistics.Controllers
         public int calculatePercentage(int CurrentValue, int totallValue)
         {
 
-            return (int)CurrentValue*100/totallValue;
+            return (int)CurrentValue * 100 / totallValue;
 
         }
 
@@ -65,25 +58,25 @@ namespace WebSiteStatistics.Controllers
         }
         public ActionResult Chart()
         {
-            IList<CountryViewModel> cvm=new List<CountryViewModel>();
+            IList<CountryViewModel> cvm = new List<CountryViewModel>();
             using (var db = new AppDbContext())
             {
-                
+
                 var countries = db.Countries.AsNoTracking().ToList();
-                int totalvisits= countries.Sum(country => country.ViewCount);
+                int totalvisits = countries.Sum(country => country.ViewCount);
                 foreach (var country in countries)
                 {
 
-                   cvm.Add(new CountryViewModel()
+                    cvm.Add(new CountryViewModel()
                     {
                         ViewCount = country.ViewCount,
                         CountryName = country.CountryName,
                         TotalVisits = totalvisits,
-                        Percentage = country.ViewCount*100/totalvisits
-                        
+                        Percentage = country.ViewCount * 100 / totalvisits
+
                     });
                 }
-                
+
                 return View(cvm);
             }
         }
@@ -103,9 +96,67 @@ namespace WebSiteStatistics.Controllers
             }
 
         }
+        [HttpGet]
+        public JsonResult RequestUserOsData()
+        {
+            using (var db = new AppDbContext())
+            {
+                var results = db.Statisticses.GroupBy(ua => new { ua.UserOs}).Select(g => new {lable = g.Key.UserOs, data = g.Count()}).ToArray();
+                return Json(results, JsonRequestBehavior.AllowGet);
+            }
+
+
+
+        }
+        [HttpGet]
+        public JsonResult RequestUserBrowserData()
+        {
+            using (var db = new AppDbContext())
+            {
+                var results = db.Statisticses.GroupBy(ua => new { ua.UserAgent }).Select(g => new { lable = g.Key.UserAgent, value = g.Count() }).ToArray();
+                return Json(results, JsonRequestBehavior.AllowGet);
+            }
+
+
+
+        }
+        [HttpGet]
+        public JsonResult RequestVisitorsCountryData()
+        {
+            using (var db = new AppDbContext())
+            {
+                
+                var results = db.Countries.Select(c => new {y = c.CountryName, a = c.ViewCount}).ToArray();
+                return Json(results, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        [HttpGet]
+        public JsonResult RequestVisitorsVectorMapData()
+        {
+            var countrydata =new List<VectorMapViewModel>();
+            using (var db = new AppDbContext())
+            {
+                
+                var results = db.Countries;
+                countrydata.AddRange(results.Select(country => new VectorMapViewModel
+                {
+                    CountryCode = country.CountryCode, CountryVisit = country.ViewCount
+                }));
+
+
+                return Json(countrydata, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        public ActionResult VectorMap()
+        {
+            return View();
+        }
+
         public ActionResult BlockeIps()
         {
-            IList<BlockedIpViewModel> bivm=new List<BlockedIpViewModel>();
+            IList<BlockedIpViewModel> bivm = new List<BlockedIpViewModel>();
             using (var db = new AppDbContext())
             {
                 var blockedips = db.BlockedIps.AsNoTracking().ToList();
@@ -116,7 +167,7 @@ namespace WebSiteStatistics.Controllers
                         Id = blockedip.Id,
                         IpAddress = blockedip.IpAddress
                     });
-                    
+
                 }
                 return View(bivm);
 
@@ -125,18 +176,19 @@ namespace WebSiteStatistics.Controllers
         [HttpPost]
         public ActionResult AddIp(string ipAddress)
         {
-            var ips=new List<BlockedIpViewModel>();
+            var ips = new List<BlockedIpViewModel>();
             if (!string.IsNullOrEmpty(ipAddress))
             {
                 using (var db = new AppDbContext())
                 {
-                    var bi = new BlockedIp {IpAddress = ipAddress};
+                    var bi = new BlockedIp { IpAddress = ipAddress };
                     db.BlockedIps.Add(bi);
                     db.SaveChanges();
                     var ipss = db.BlockedIps.AsNoTracking().ToList();
                     ips.AddRange(ipss.Select(ipaddrss => new BlockedIpViewModel()
                     {
-                        Id = ipaddrss.Id, IpAddress = ipaddrss.IpAddress
+                        Id = ipaddrss.Id,
+                        IpAddress = ipaddrss.IpAddress
                     }));
                 }
 
@@ -164,5 +216,45 @@ namespace WebSiteStatistics.Controllers
 
 
         }
+
+        public ActionResult Chart2()
+        {
+            return View();
+        }
+
+        //بارگزاری اطلاعات برای جدول درصد استفاده از مرورگرها
+        public ActionResult BrowserTable()
+        {
+            var btv=new List<BrowserTableViewModel>();
+            using (var db=new AppDbContext())
+            {
+                var tottal = db.Statisticses.Count();
+                btv.AddRange(db.Statisticses.GroupBy(ua => new { ua.UserAgent }).OrderByDescending(g=>g.Count()).Select(g => new BrowserTableViewModel() {BrowserName = g.Key.UserAgent,BrowserViewCount = g.Count(),TottalVisits = tottal }).ToList());
+
+            }
+
+
+
+            return PartialView("_BrowserTablePartial",btv);
+        }
+        //بارگزاری اطلاعات برای جدول درصد استفاده از سیستم عامل ها
+        public ActionResult OsTable()
+        {
+            var otv = new List<OsTableViewModel>();
+            using (var db = new AppDbContext())
+            {
+                var tottal = db.Statisticses.Count();
+                otv.AddRange(db.Statisticses.GroupBy(ua => new { ua.UserOs }).OrderByDescending(g=>g.Count()).Select(g => new OsTableViewModel() { OsName = g.Key.UserOs, OsViewCount = g.Count(), TottalVisits = tottal }).ToList());
+
+            }
+
+
+
+            return PartialView("_OsTablePartial", otv);
+        }
+
+
+
     }
+   
 }

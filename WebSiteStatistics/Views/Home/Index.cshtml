@@ -1,6 +1,4 @@
-﻿
-@model WebSiteStatistics.Models.StatisticsViewModel
-
+﻿@model WebSiteStatistics.Models.StatisticsViewModel
 <div class="row">
 
     <div class="col-md-12">
@@ -53,7 +51,7 @@
 
                     </div>
                     <div class="col-md-3">
-                        
+
 
 
                         <div class="HitBoxBlue">
@@ -70,228 +68,17 @@
 
                 </div>
                 <div class="row top20">
-                    <div class="col-md-12">
-                        <div class="box">
-                            <div class="box-header">
-                                <span>
-                                    <span class="imgleft fa fa-table" aria-hidden="true"></span>
-                                    نمایش بازدیدها به تفکیک مرورگرها
-                                </span>
 
-                            </div>
-                            <div class="box-content">
-                                <div class="table-responsive">
+                    @{ Html.RenderAction("BrowserTable", "Home"); }
 
-                                    <table class="table m-0">
+                </div>
 
-                                        <tbody>
+                <div class="row">
 
-                                        <tr>
-                                            <td>1</td>
-                                            <td>
-                                                <i class="fa fa-chrome fa-2x" style="color: red" aria-hidden="true"></i>
-                                            </td>
-                                            <td>کروم</td>
-                                            <td>@Model.Chrome</td>
-                                            <td>
-                                                <div class="progress-bar progress-bar-striped active" role="progressbar"
-                                                     aria-valuenow="@Model.Chrome" aria-valuemin="0" aria-valuemax="100" style="width: @(Model.Chrome*100/Model.TotallVisits)%">
-                                                    @(Model.Chrome * 100 / Model.TotallVisits)%
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>۲</td>
-                                            <td>
-                                                <i class="fa fa-internet-explorer fa-2x" style="color: red" aria-hidden="true"></i>
+                    @{Html.RenderAction("OsTable","Home");}
+                </div>
 
-                                            </td>
-                                            <td>اینترنت اکسپلپورر</td>
-                                            <td>@Model.InternetExplorer</td>
-                                            <td>
-                                                <div class="progress-bar progress-bar-striped active" role="progressbar"
-                                                     aria-valuenow="@Model.InternetExplorer" aria-valuemin="0" aria-valuemax="100" style="width: @(Model.InternetExplorer*100/Model.TotallVisits)%">
-                                                    @(Model.InternetExplorer * 100 / Model.TotallVisits)%
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>۳</td>
-                                            <td>
-                                                <i class="fa fa-firefox fa-2x" style="color: red" aria-hidden="true"></i>
-
-                                            </td>
-                                            <td>فایرفاکس</td>
-                                            <td>@Model.FireFox</td>
-                                            <td>
-                                                <div class="progress-bar progress-bar-striped active" role="progressbar"
-                                                     aria-valuenow="@Model.FireFox" aria-valuemin="0" aria-valuemax="100" style="width: @(Model.FireFox*100/Model.TotallVisits)%">
-                                                   @(Model.FireFox * 100 / Model.TotallVisits)%
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>۴</td>
-                                            <td>
-                                                <i class="fa  fa-safari fa-2x" style="color: red" aria-hidden="true"></i>
-
-                                            </td>
-                                            <td>سافاری</td>
-                                            <td>@Model.Safari</td>
-                                            <td>
-                                                <div class="progress-bar progress-bar-striped active" role="progressbar"
-                                                     aria-valuenow="@Model.Safari" aria-valuemin="0" aria-valuemax="100" style="width: @(Model.Safari*100/Model.TotallVisits)%">
-                                                    @(Model.Safari * 100 / Model.TotallVisits)%
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>۵</td>
-                                            <td>
-                                                <i class="fa  fa-bars fa-2x" style="color: red" aria-hidden="true"></i>
-
-                                            </td>
-                                            <td>سایر مرورگرها</td>
-                                            <td>@Model.OtherBrowsers</td>
-                                            <td>
-                                                <div class="progress-bar progress-bar-striped active" role="progressbar"
-                                                     aria-valuenow="@Model.OtherBrowsers" aria-valuemin="0" aria-valuemax="100" style="width: @(Model.OtherBrowsers*100/Model.TotallVisits)%">
-                                                    @(Model.OtherBrowsers * 100 / Model.TotallVisits)%
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        </tbody>
-
-                                    </table>
-
-                                </div>
-
-
-                            </div>
-                            </div>
-
-
-
-
-
-                            </div>
-
-
-                        </div>
-
-                        <div class="row">
-
-                            <div class="col-md-12">
-
-                                <div class="box">
-                                    <div class="box-header">
-                                        <span>
-                                            <span class="imgleft fa fa-table" aria-hidden="true"></span>
-                                            نمایش آمار بازدید به تفکیک سیستم عامل
-                                        </span>
-
-                                    </div>
-                                    <div class="box-content">
-
-                                        <div class="table-responsive">
-
-                                            <table class="table m-0">
-
-                                                <tbody>
-
-                                                    <tr>
-                                                        <td>1</td>
-                                                        <td>
-                                                            <i class="fa fa-windows fa-2x" style="color: green" aria-hidden="true"></i>
-                                                        </td>
-                                                        <td>ویندوز</td>
-                                                        <td>@Model.Windows</td>
-                                                        <td>
-                                                            <div class="progress-bar progress-bar-striped active" role="progressbar"
-                                                                 aria-valuenow="@Model.Windows" aria-valuemin="0" aria-valuemax="100" style="width: @(Model.Windows*100/Model.TotallVisits)%">
-                                                                @(Model.Windows * 100 / Model.TotallVisits)%
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>2</td>
-                                                        <td>
-                                                            <i class="fa fa-linux fa-2x" style="color: green" aria-hidden="true"></i>
-
-                                                        </td>
-                                                        <td>لینوکس</td>
-                                                        <td>@Model.Linux</td>
-                                                        <td>
-
-                                                            <div class="progress-bar progress-bar-striped active" role="progressbar" 
-                                                                 aria-valuenow="@Model.Linux" aria-valuemin="0" aria-valuemax="100" style="width: @(Model.Linux*100/Model.TotallVisits)%">
-                                                                @(Model.Linux * 100 / Model.TotallVisits)%
-                                                            </div>
-
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>3</td>
-                                                        <td>
-                                                            <i class="fa fa-apple fa-2x" style="color: green" aria-hidden="true"></i>
-
-                                                        </td>
-                                                        <td>مک</td>
-                                                        <td>@Model.Mac</td>
-                                                        <td>
-                                                            <div class="progress-bar progress-bar-striped active" role="progressbar"
-                                                                 aria-valuenow="@Model.Mac" aria-valuemin="0" aria-valuemax="100" style="width: @(Model.Mac*100/Model.TotallVisits)%">
-                                                                @(Model.Mac * 100 / Model.TotallVisits)%
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>4</td>
-                                                        <td>
-                                                            <i class="fa  fa-android fa-2x" style="color: green" aria-hidden="true"></i>
-
-                                                        </td>
-                                                        <td>اندروید</td>
-                                                        <td>@Model.Android</td>
-                                                        <td>
-                                                            <div class="progress-bar progress-bar-striped active" role="progressbar"
-                                                                 aria-valuenow="@Model.Android" aria-valuemin="0" aria-valuemax="100" style="width: @(Model.Android*100/Model.TotallVisits)%">
-                                                                @(Model.Android*100/Model.TotallVisits)%
-
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>5</td>
-                                                        <td>
-                                                            <i class="fa  fa-bars fa-2x" style="color: green" aria-hidden="true"></i>
-
-                                                        </td>
-                                                        <td>سایر سیستم عامل ها</td>
-                                                        <td>@Model.OtherOs</td>
-                                                        <td>
-                                                            <div class="progress-bar progress-bar-striped active" role="progressbar"
-                                                                 aria-valuenow="@Model.OtherOs" aria-valuemin="0" aria-valuemax="100" style="width: @(Model.OtherOs*100/Model.TotallVisits)%">
-                                                                @(Model.OtherOs * 100 / Model.TotallVisits)%
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                </tbody>
-
-                                            </table>
-
-                                        </div>
-
-                                    </div>
-                                </div>
-
-
-
-
-                            </div>
-                        </div>
-
-                    </div>
+            </div>
 
 
 

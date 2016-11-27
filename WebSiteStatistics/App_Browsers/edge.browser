@@ -1,0 +1,13 @@
+﻿<browsers>
+  <browser id="Edge" parentID="Chrome">
+    <identification>
+      <userAgent match="Edge/(?'version'(?'major'\d+)(?'minor'\.\d+))" />
+    </identification>
+    <capabilities>
+      <capability name="browser" value="Edge" />
+      <capability name="version" value="${version}" />
+      <capability name="majorversion" value="${major}" />
+      <capability name="minorversion" value="${minor}" />
+    </capabilities>
+  </browser>
+</browsers>

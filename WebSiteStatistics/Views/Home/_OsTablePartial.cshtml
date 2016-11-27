@@ -1,0 +1,58 @@
+﻿@model List<WebSiteStatistics.Models.OsTableViewModel>
+
+
+<div class="col-md-12">
+
+    <div class="box">
+        <div class="box-header">
+            <span>
+                <span class="imgleft fa fa-table" aria-hidden="true"></span>
+                نمایش آمار بازدید به تفکیک سیستم عامل
+            </span>
+
+        </div>
+        <div class="box-content">
+
+            <div class="table-responsive">
+
+                <table class="table m-0">
+
+                    <tbody>
+                        @{
+                            foreach (var item in Model)
+                            {
+                                double CurrentNum = (double)item.OsViewCount * 100 / item.TottalVisits;
+                                var RoundUpPercentage = Math.Ceiling(CurrentNum);
+
+                                <tr>
+
+                                    <td>
+                                        <i class="fa fa-@item.OsName.ToLower() fa-2x" style="color: green" aria-hidden="true"></i>
+                                    </td>
+                                    <td>@item.OsName</td>
+                                    <td>@item.OsViewCount</td>
+                                    <td>
+                                        <div class="progress-bar progress-bar-striped active" role="progressbar"
+                                             aria-valuenow="@item.OsViewCount" aria-valuemin="0" aria-valuemax="100" style="min-width:20px;width: @RoundUpPercentage%">
+                                            @RoundUpPercentage%
+                                        </div>
+                                    </td>
+                                </tr>
+
+                            }
+                        }
+
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+    </div>
+
+
+
+
+</div>

@@ -9,13 +9,27 @@ namespace WebSiteStatistics
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/Scripts/jquery-3.1.0.min.js"));
+                        "~/Scripts/jquery-1.10.2.min.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/Canvas").Include(
                        "~/Scripts/canvasjs.min.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/Chartsjs").Include(
+                        "~/Scripts/flot/jquery.flot.min.js",
+                        "~/Scripts/flot/jquery.flot.resize.min.js",
+                        "~/Scripts/flot/jquery.flot.orderBars.js",
+                        "~/Scripts/flot/jquery.flot.stack.min.js",
+                        "~/Scripts/flot/jquery.flot.pie.min.js",
+                        "~/Scripts/flot-tooltip/jquery.flot.tooltip.min.js",
+                        "~/Scripts/raphael/raphael-min.js",
+                        "~/Scripts/morris/morris.min.js"
+                        ));
+
+            bundles.Add(new StyleBundle("~/Content/Chartscss").Include(
+                     "~/Scripts/morris/morris.css"
+                    ));
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
-                        "~/Scripts/jquery.validate*"));
+"~/Scripts/jquery.validate*"));
 
             // Use the development version of Modernizr to develop with and learn from. Then, when you're
             // ready for production, use the build tool at http://modernizr.com to pick only the tests you need.

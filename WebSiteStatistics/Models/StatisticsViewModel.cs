@@ -18,19 +18,7 @@ namespace WebSiteStatistics.Models
         public int YesterdayVisits { get; set; }
         public int TotallVisits { get; set; }
         public int UniquVisitors { get; set; }
-        //Browsers
-        public int Chrome { get; set; }
-        public int FireFox { get; set; }
-        public int Safari { get; set; }
-        public int InternetExplorer { get; set; }
-        public int OtherBrowsers { get; set; }
-        //Os
-        public int Windows { get; set; }
-        public int Linux { get; set; }
-        public int Mac { get; set; }
-        public int Android { get; set; }
-        public int OtherOs { get; set; }
-        public int Ios { get; set; }
+       
         
 
 
