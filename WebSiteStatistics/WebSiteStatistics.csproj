@@ -139,7 +139,9 @@
     <Compile Include="Models\BlockedIpViewModel.cs" />
     <Compile Include="Models\BrowserTableViewModel.cs" />
     <Compile Include="Models\CountryViewModel.cs" />
+    <Compile Include="Models\CurrentVisitorViewModel.cs" />
     <Compile Include="Models\OsTableViewModel.cs" />
+    <Compile Include="Models\ReferrerViewModel.cs" />
     <Compile Include="Models\StatisticsViewModel.cs" />
     <Compile Include="Models\UserOsViewModel.cs" />
     <Compile Include="Models\VectorMapViewModel.cs" />
@@ -422,6 +424,8 @@
     <Content Include="Views\Home\Chart2.cshtml" />
     <Content Include="Views\Home\_BrowserTablePartial.cshtml" />
     <Content Include="Views\Home\_OsTablePartial.cshtml" />
+    <Content Include="Views\Home\_UserReferrerPartial.cshtml" />
+    <Content Include="Views\Home\_CurrentVisitorPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

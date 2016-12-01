@@ -1,0 +1,52 @@
+﻿@model List<WebSiteStatistics.Models.ReferrerViewModel>
+
+
+
+<div class="col-md-12">
+    <div class="box">
+        <div class="box-header">
+            <span>
+                <span class="imgleft fa fa-globe" aria-hidden="true"></span>
+                ارجاعات
+            </span>
+
+        </div>
+        <div class="box-content">
+            <div class="table-responsive">
+
+                <table class="table m-0">
+
+                    <tbody>
+
+                        @{
+                            foreach (var item in Model)
+                            {
+                                <tr>
+
+                                   
+                                    <td><span class="badge">@item.ReferrerCount</span></td>
+                                    <td><span class="referrerurl">@item.ReferrerUrl</span></td>
+                                </tr>
+
+
+                            }
+
+
+                        }
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+
+        </div>
+    </div>
+
+
+
+
+
+</div>
+

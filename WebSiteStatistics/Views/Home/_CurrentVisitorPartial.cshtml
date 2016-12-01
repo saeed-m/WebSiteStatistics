@@ -1,0 +1,31 @@
+﻿@model WebSiteStatistics.Models.CurrentVisitorViewModel
+
+
+<div class="box">
+    <div class="box-header">
+        <span>
+            <span class="imgleft fa fa-user" aria-hidden="true"></span>
+            مشخصات شما
+        </span>
+
+    </div>
+    <div class="box-content">
+
+        <ul class="list-group">
+            <li class="list-group-item">
+                @Model.Browser<span class="pull-left fa fa-globe" aria-hidden="true"></span>
+            </li>
+            <li class="list-group-item">
+                @Model.IpAddress<span class="pull-left fa fa-server" aria-hidden="true"></span>
+            </li>
+            <li class="list-group-item">
+                @Model.OsName<span class="pull-left fa fa-windows" aria-hidden="true"></span>
+            </li>
+
+        </ul>
+
+    </div>
+
+
+
+</div>

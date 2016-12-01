@@ -10,6 +10,7 @@ using DataLayer.DbContext;
 using DomainClasses.Entities;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using UAParser;
 using WebSiteStatistics.Models;
 
 namespace WebSiteStatistics.Controllers
@@ -229,7 +230,7 @@ namespace WebSiteStatistics.Controllers
             using (var db=new AppDbContext())
             {
                 var tottal = db.Statisticses.Count();
-                btv.AddRange(db.Statisticses.GroupBy(ua => new { ua.UserAgent }).OrderByDescending(g=>g.Count()).Select(g => new BrowserTableViewModel() {BrowserName = g.Key.UserAgent,BrowserViewCount = g.Count(),TottalVisits = tottal }).ToList());
+                btv.AddRange(db.Statisticses.GroupBy(ua => new { ua.UserAgent }).OrderByDescending(g=>g.Count()).Select(g => new BrowserTableViewModel() {BrowserName = g.Key.UserAgent == "InternetExplorer" ? "internet-explorer" : g.Key.UserAgent, BrowserViewCount = g.Count(),TottalVisits = tottal }).ToList());
 
             }
 
@@ -251,6 +252,58 @@ namespace WebSiteStatistics.Controllers
 
 
             return PartialView("_OsTablePartial", otv);
+        }
+
+        public ActionResult Referrer()
+        {
+            var ur=new List<ReferrerViewModel>();
+            using (var db=new AppDbContext())
+            {
+                ur.AddRange(db.Statisticses.GroupBy(r=>new {r.Referer}).OrderByDescending(r=>r.Count()).Select(r=>new ReferrerViewModel() {ReferrerUrl = r.Key.Referer,ReferrerCount = r.Count()}).ToList());
+
+            }
+
+            return PartialView("_UserReferrerPartial",ur);
+        }
+
+        public ActionResult CurrentVisitor()
+        {
+            var Cv=new CurrentVisitorViewModel()
+            {
+                
+                IpAddress = GetIPAddress(),
+                Browser = Request.Browser.Browser,
+                OsName = GetUserOS(Request.UserAgent)
+            };
+            
+
+
+            return PartialView("_CurrentVisitorPartial",Cv);
+        }
+
+        //Helpers
+        public static string GetUserOS(string userAgent)
+        {
+            // get a parser with the embedded regex patterns
+            var uaParser = Parser.GetDefault();
+            ClientInfo c = uaParser.Parse(userAgent);
+            return c.OS.Family;
+        }
+        public string GetIPAddress()
+        {
+            System.Web.HttpContext context = System.Web.HttpContext.Current;
+            string ipAddress = context.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
+
+            if (!string.IsNullOrEmpty(ipAddress))
+            {
+                string[] addresses = ipAddress.Split(',');
+                if (addresses.Length != 0)
+                {
+                    return addresses[0];
+                }
+            }
+
+            return context.Request.ServerVariables["REMOTE_ADDR"];
         }
 
 
