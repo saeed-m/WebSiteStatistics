@@ -1,3 +1,0 @@
-dbuser:  cssproi2_wsdbuser
-dbname:cssproi2_ws
-dbuser pass:I5stj46*

@@ -8,6 +8,9 @@ using Microsoft.AspNet.SignalR;
 
 namespace WebSiteStatistics.Hubs
 {
+
+
+    //هاب نمایش کاربران آنلاین
     public class OnlineUsersHub : Hub
     {
         public static readonly ConcurrentDictionary<string, string> OnlineUsers = new ConcurrentDictionary<string, string>();
