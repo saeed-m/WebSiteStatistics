@@ -32,6 +32,7 @@
                         <a href="@Url.Action("Chart2", "Home")" class="list-group-item"><span class="pull-left fa fa-pie-chart" aria-hidden="true"></span> نمودار شماره دو</a>
                         <a href="@Url.Action("Map", "Home")" class="list-group-item">مکان بازدید روی نقشه<span class="pull-left fa fa-map" aria-hidden="true"></span></a>
                         <a href="@Url.Action("BlockeIps", "Home")" class="list-group-item">تنظیمات<span class="pull-left fa fa-cogs" aria-hidden="true"></span></a>
+                        <a href="@Url.Action("Index", "About")" class="list-group-item">درباره<span class="pull-left fa fa-question-circle" aria-hidden="true"></span></a>
                     </div>
 
                 </div>
@@ -40,22 +41,44 @@
 
             </div>
 
-            @{Html.RenderAction("CurrentVisitor","Home");}
+            @{Html.RenderAction("CurrentVisitor", "Home");}
         </div>
         <div class="col-md-10">
 
             @RenderBody()
 
         </div>
-
+       
     </div>
+   
     
 </div>
     
+    <footer class="navbar-default navbar-fixed-bottom footer">
+        <div class="container-fluid">
+            <div class="col-md-12 top10 text-center">
+                آدرس مخزن کد در
+                <a href="https://github.com/saeed-m/WebSiteStatistics" target="_blank">
+                    GitHub
+                    <span class="fa fa-github">
 
+                    </span>
+                </a>
+              |
+               ارائه شده توسط
+                <a href="http://csspro.ir/" target="_blank">
+                    CssPro.Ir
+                   </a>
+            </div>
+        </div>
+    </footer>
     @Scripts.Render("~/bundles/jquery")
+    <script src="~/Scripts/noty/packaged/jquery.noty.packaged.min.js"></script>
+    @Scripts.Render("~/bundles/SignalR")
+    <script type="text/javascript" src="~/signalr/hubs"></script>
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/Canvas")
+
     
 
     @RenderSection("scripts", required: false)

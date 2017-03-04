@@ -238,6 +238,7 @@ body {
     float: left;
     text-align: left;
     vertical-align: middle;
-
-
+    }
+   .footer {
+       height: 60px;
    }

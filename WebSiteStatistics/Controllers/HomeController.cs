@@ -6,6 +6,8 @@ using System.Linq;
 using System.Net.Mime;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Script.Serialization;
+using System.Web.WebPages;
 using DataLayer.DbContext;
 using DomainClasses.Entities;
 using Newtonsoft.Json;
@@ -28,11 +30,11 @@ namespace WebSiteStatistics.Controllers
 
             StatisticsViewModel svm = new StatisticsViewModel()
             {
-                OnlineUsers = (int)HttpContext.Application["OnlineUsersCount"],
+                //OnlineUsers = (int)HttpContext.Application["OnlineUsersCount"],
                 TodayVisits = stat.Count(ss => ss.DateStamp.Day == DateTime.Now.Day),
                 TotallVisits = stat.Count,
                 UniquVisitors = stat.GroupBy(ta => ta.IpAddress).Select(ta => ta.Key).Count(),
-              
+
             };
 
 
@@ -102,7 +104,7 @@ namespace WebSiteStatistics.Controllers
         {
             using (var db = new AppDbContext())
             {
-                var results = db.Statisticses.GroupBy(ua => new { ua.UserOs}).Select(g => new {lable = g.Key.UserOs, data = g.Count()}).ToArray();
+                var results = db.Statisticses.GroupBy(ua => new { ua.UserOs }).Select(g => new { lable = g.Key.UserOs, data = g.Count() }).ToArray();
                 return Json(results, JsonRequestBehavior.AllowGet);
             }
 
@@ -126,8 +128,8 @@ namespace WebSiteStatistics.Controllers
         {
             using (var db = new AppDbContext())
             {
-                
-                var results = db.Countries.Select(c => new {y = c.CountryName, a = c.ViewCount}).ToArray();
+
+                var results = db.Countries.Select(c => new { y = c.CountryName, a = c.ViewCount }).ToArray();
                 return Json(results, JsonRequestBehavior.AllowGet);
             }
         }
@@ -135,24 +137,23 @@ namespace WebSiteStatistics.Controllers
         [HttpGet]
         public JsonResult RequestVisitorsVectorMapData()
         {
-            var countrydata =new List<VectorMapViewModel>();
+            var countrydata = new List<VectorMapViewModel>();
             using (var db = new AppDbContext())
             {
-                
                 var results = db.Countries;
                 countrydata.AddRange(results.Select(country => new VectorMapViewModel
                 {
-                    CountryCode = country.CountryCode, CountryVisit = country.ViewCount
+                    CountryCode = country.CountryCode,
+                    CountryVisit = country.ViewCount
                 }));
-
-
-                return Json(countrydata, JsonRequestBehavior.AllowGet);
+                var jd=JsonConvert.SerializeObject(countrydata);
+                return Json(jd, JsonRequestBehavior.AllowGet);
             }
         }
 
         public ActionResult VectorMap()
         {
-            return View();
+            return View("VectorMap");
         }
 
         public ActionResult BlockeIps()
@@ -183,8 +184,8 @@ namespace WebSiteStatistics.Controllers
                 using (var db = new AppDbContext())
                 {
                     var bi = new BlockedIp { IpAddress = ipAddress };
-                    db.BlockedIps.Add(bi);
-                    db.SaveChanges();
+                    //db.BlockedIps.Add(bi);
+                    //db.SaveChanges();
                     var ipss = db.BlockedIps.AsNoTracking().ToList();
                     ips.AddRange(ipss.Select(ipaddrss => new BlockedIpViewModel()
                     {
@@ -202,8 +203,8 @@ namespace WebSiteStatistics.Controllers
             var ips = new List<BlockedIpViewModel>();
             using (var db = new AppDbContext())
             {
-                db.BlockedIps.Remove(db.BlockedIps.First(i => i.Id == Id));
-                db.SaveChanges();
+                //db.BlockedIps.Remove(db.BlockedIps.First(i => i.Id == Id));
+                //db.SaveChanges();
                 var ipss = db.BlockedIps.AsNoTracking().ToList();
                 ips.AddRange(ipss.Select(ipaddrss => new BlockedIpViewModel()
                 {
@@ -226,18 +227,20 @@ namespace WebSiteStatistics.Controllers
         //بارگزاری اطلاعات برای جدول درصد استفاده از مرورگرها
         public ActionResult BrowserTable()
         {
-            var btv=new List<BrowserTableViewModel>();
-            using (var db=new AppDbContext())
+            var btv = new List<BrowserTableViewModel>();
+            using (var db = new AppDbContext())
             {
                 var tottal = db.Statisticses.Count();
-                btv.AddRange(db.Statisticses.GroupBy(ua => new { ua.UserAgent }).OrderByDescending(g=>g.Count()).Select(g => new BrowserTableViewModel() {BrowserName = g.Key.UserAgent == "InternetExplorer" ? "internet-explorer" : g.Key.UserAgent, BrowserViewCount = g.Count(),TottalVisits = tottal }).ToList());
+                btv.AddRange(db.Statisticses.GroupBy(ua => new { ua.UserAgent }).OrderByDescending(g => g.Count()).Select(g => new BrowserTableViewModel() {BrowserIcon =g.Key.UserAgent, BrowserName = g.Key.UserAgent , BrowserViewCount = g.Count(), TottalVisits = tottal }).ToList());
 
             }
 
 
 
-            return PartialView("_BrowserTablePartial",btv);
+            return PartialView("_BrowserTablePartial", btv);
         }
+
+      
         //بارگزاری اطلاعات برای جدول درصد استفاده از سیستم عامل ها
         public ActionResult OsTable()
         {
@@ -245,7 +248,7 @@ namespace WebSiteStatistics.Controllers
             using (var db = new AppDbContext())
             {
                 var tottal = db.Statisticses.Count();
-                otv.AddRange(db.Statisticses.GroupBy(ua => new { ua.UserOs }).OrderByDescending(g=>g.Count()).Select(g => new OsTableViewModel() { OsName = g.Key.UserOs, OsViewCount = g.Count(), TottalVisits = tottal }).ToList());
+                otv.AddRange(db.Statisticses.GroupBy(ua => new { ua.UserOs }).OrderByDescending(g => g.Count()).Select(g => new OsTableViewModel() {OsIcon = g.Key.UserOs,OsName = g.Key.UserOs, OsViewCount = g.Count(), TottalVisits = tottal }).ToList());
 
             }
 
@@ -256,29 +259,29 @@ namespace WebSiteStatistics.Controllers
 
         public ActionResult Referrer()
         {
-            var ur=new List<ReferrerViewModel>();
-            using (var db=new AppDbContext())
+            var ur = new List<ReferrerViewModel>();
+            using (var db = new AppDbContext())
             {
-                ur.AddRange(db.Statisticses.GroupBy(r=>new {r.Referer}).OrderByDescending(r=>r.Count()).Select(r=>new ReferrerViewModel() {ReferrerUrl = r.Key.Referer,ReferrerCount = r.Count()}).ToList());
+                ur.AddRange(db.Statisticses.GroupBy(r => new { r.Referer }).OrderByDescending(r => r.Count()).Select(r => new ReferrerViewModel() { ReferrerUrl = r.Key.Referer.Substring(0, 100), ReferrerCount = r.Count() }).ToList());
 
             }
 
-            return PartialView("_UserReferrerPartial",ur);
+            return PartialView("_UserReferrerPartial", ur);
         }
 
         public ActionResult CurrentVisitor()
         {
-            var Cv=new CurrentVisitorViewModel()
+            var Cv = new CurrentVisitorViewModel()
             {
-                
+
                 IpAddress = GetIPAddress(),
                 Browser = Request.Browser.Browser,
                 OsName = GetUserOS(Request.UserAgent)
             };
-            
 
 
-            return PartialView("_CurrentVisitorPartial",Cv);
+
+            return PartialView("_CurrentVisitorPartial", Cv);
         }
 
         //Helpers
@@ -309,5 +312,5 @@ namespace WebSiteStatistics.Controllers
 
 
     }
-   
+
 }

@@ -10,6 +10,9 @@ namespace WebSiteStatistics
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                         "~/Scripts/jquery-1.10.2.min.js"));
+            bundles.Add(new ScriptBundle("~/bundles/SignalR").Include(
+                        "~/Scripts/jquery.signalR-2.2.1.min.js"));
+
 
             bundles.Add(new ScriptBundle("~/bundles/Canvas").Include(
                        "~/Scripts/canvasjs.min.js"));

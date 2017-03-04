@@ -52,11 +52,35 @@
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.Core, Version=2.2.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.Core.2.2.1\lib\net45\Microsoft.AspNet.SignalR.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.SystemWeb, Version=2.2.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.SystemWeb.2.2.1\lib\net45\Microsoft.AspNet.SignalR.SystemWeb.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Owin, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.2.1.0\lib\net45\Microsoft.Owin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.2.1.0\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.2.1.0\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -132,10 +156,12 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AboutController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Hubs\OnlineUsersHub.cs" />
     <Compile Include="Models\BlockedIpViewModel.cs" />
     <Compile Include="Models\BrowserTableViewModel.cs" />
     <Compile Include="Models\CountryViewModel.cs" />
@@ -145,9 +171,12 @@
     <Compile Include="Models\StatisticsViewModel.cs" />
     <Compile Include="Models\UserOsViewModel.cs" />
     <Compile Include="Models\VectorMapViewModel.cs" />
+    <Compile Include="Modules\StatModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Images\ajax-loader.gif" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -357,6 +386,9 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="sampledata\VmapData.js" />
+    <Content Include="Scripts\animsition\js\jquery.animsition.js" />
+    <Content Include="Scripts\animsition\js\jquery.animsition.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\bootstrap.min.js.map" />
@@ -391,14 +423,54 @@
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery-3.1.0.min.js" />
+    <Content Include="Scripts\jquery.signalR-2.2.1.js" />
+    <Content Include="Scripts\jquery.signalR-2.2.1.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\jqvmap\jquery.vmap.min.js" />
+    <Content Include="Scripts\jqvmap\maps\continents\jquery.vmap.africa.js" />
+    <Content Include="Scripts\jqvmap\maps\continents\jquery.vmap.asia.js" />
+    <Content Include="Scripts\jqvmap\maps\continents\jquery.vmap.australia.js" />
+    <Content Include="Scripts\jqvmap\maps\continents\jquery.vmap.europe.js" />
+    <Content Include="Scripts\jqvmap\maps\continents\jquery.vmap.north-america.js" />
+    <Content Include="Scripts\jqvmap\maps\continents\jquery.vmap.south-america.js" />
+    <Content Include="Scripts\jqvmap\maps\continents\readme.txt" />
+    <Content Include="Scripts\jqvmap\maps\jquery.vmap.algeria.js" />
+    <Content Include="Scripts\jqvmap\maps\jquery.vmap.brazil.js" />
+    <Content Include="Scripts\jqvmap\maps\jquery.vmap.europe.js" />
+    <Content Include="Scripts\jqvmap\maps\jquery.vmap.france.js" />
+    <Content Include="Scripts\jqvmap\maps\jquery.vmap.germany.js" />
+    <Content Include="Scripts\jqvmap\maps\jquery.vmap.russia.js" />
+    <Content Include="Scripts\jqvmap\maps\jquery.vmap.usa.js" />
+    <Content Include="Scripts\jqvmap\maps\jquery.vmap.world.js" />
+    <Content Include="Scripts\jRespond\jRespond.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\morris\morris.css" />
     <Content Include="Scripts\morris\morris.js" />
     <Content Include="Scripts\morris\morris.min.js" />
+    <Content Include="Scripts\noty\jquery.noty.js" />
+    <Content Include="Scripts\noty\layouts\bottom.js" />
+    <Content Include="Scripts\noty\layouts\bottomCenter.js" />
+    <Content Include="Scripts\noty\layouts\bottomLeft.js" />
+    <Content Include="Scripts\noty\layouts\bottomRight.js" />
+    <Content Include="Scripts\noty\layouts\center.js" />
+    <Content Include="Scripts\noty\layouts\centerLeft.js" />
+    <Content Include="Scripts\noty\layouts\centerRight.js" />
+    <Content Include="Scripts\noty\layouts\inline.js" />
+    <Content Include="Scripts\noty\layouts\top.js" />
+    <Content Include="Scripts\noty\layouts\topCenter.js" />
+    <Content Include="Scripts\noty\layouts\topLeft.js" />
+    <Content Include="Scripts\noty\layouts\topRight.js" />
+    <Content Include="Scripts\noty\packaged\jquery.noty.packaged.js" />
+    <Content Include="Scripts\noty\packaged\jquery.noty.packaged.min.js" />
+    <Content Include="Scripts\noty\promise.js" />
+    <Content Include="Scripts\noty\themes\bootstrap.js" />
+    <Content Include="Scripts\noty\themes\default.js" />
+    <Content Include="Scripts\noty\themes\metroui.js" />
+    <Content Include="Scripts\noty\themes\relax.js" />
+    <Content Include="Scripts\noty\themes\semanticUI.js" />
     <Content Include="Scripts\raphael\raphael-min.js" />
     <Content Include="Scripts\raphael\raphael.js" />
     <Content Include="Scripts\respond.js" />
@@ -426,6 +498,8 @@
     <Content Include="Views\Home\_OsTablePartial.cshtml" />
     <Content Include="Views\Home\_UserReferrerPartial.cshtml" />
     <Content Include="Views\Home\_CurrentVisitorPartial.cshtml" />
+    <Content Include="Views\Home\VectorMap.cshtml" />
+    <Content Include="Views\About\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

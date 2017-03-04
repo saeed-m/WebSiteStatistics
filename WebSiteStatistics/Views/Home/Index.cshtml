@@ -19,7 +19,7 @@
                             <div class="text-center top10">
                                 <span class="fa fa-users fa-3x" style="color: #fff"></span>
                                 <h4>افراد آنلاین</h4>
-                                <span> @Model.OnlineUsers نفر</span>
+                                <span> <span id="usersCount"></span> نفر</span>
                             </div>
 
                         </div>
@@ -79,7 +79,7 @@
                 </div>
                 <div class="row">
 
-                    @{Html.RenderAction("Referrer","Home");}
+                    @{Html.RenderAction("Referrer", "Home");}
 
                 </div>
 
@@ -93,3 +93,32 @@
     </div>
 
 </div>
+
+@section scripts
+{
+    <script type="text/javascript">
+        $(function() {
+            $.connection.hub.logging = true;
+            var onlineUsersHub = $.connection.onlineUsersHub;
+            onlineUsersHub.client.updateUsersOnlineCount = function(count) {
+                $('#usersCount').text(count);
+                if (count > 1) {
+                    $.noty.defaults.killer = true;
+                    noty({
+                        text: 'کاربر جدیدی وارد سایت شد!',
+                        layout: 'topLeft',
+                        theme: 'defaultTheme',
+                        closeWith: ['click', 'hover'],
+                        type: 'information'
+                    });
+                }
+
+            }
+            $.connection.hub.start();
+        });
+
+
+    </script>
+
+
+}
