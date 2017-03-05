@@ -502,6 +502,8 @@
     <Content Include="Views\Home\VectorMap.cshtml" />
     <Content Include="Views\About\Index.cshtml" />
     <Content Include="Views\Home\_SubDetailsPartial.cshtml" />
+    <Content Include="Sound\in.ogg" />
+    <Content Include="Sound\out.ogg" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
