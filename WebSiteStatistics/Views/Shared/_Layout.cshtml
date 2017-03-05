@@ -26,8 +26,8 @@
                 <div class="box-content">
 
                     <div class="list-group">
-                        <a href="@Url.Action("Index", "Home")" class="list-group-item">صفحه اصلی<span class="pull-left fa fa-eye" aria-hidden="true"></span></a>
-                        <a href="@Url.Action("Table", "Home")" class="list-group-item"><span class="pull-left fa fa-table" aria-hidden="true"></span>به تفکیک کشور</a>
+                        <a href="@Url.Action("Index", "Home")" class="list-group-item">صفحه اصلی<span class="pull-left fa fa-home" aria-hidden="true"></span></a>
+                        <a href="@Url.Action("Table", "Home")" class="list-group-item"><span class="pull-left fa fa-flag" aria-hidden="true"></span>به تفکیک کشور</a>
                         <a href="@Url.Action("Chart", "Home")" class="list-group-item"><span class="pull-left fa fa-bar-chart" aria-hidden="true"></span>نمودار شماره یک</a>
                         <a href="@Url.Action("Chart2", "Home")" class="list-group-item"><span class="pull-left fa fa-pie-chart" aria-hidden="true"></span> نمودار شماره دو</a>
                         <a href="@Url.Action("Map", "Home")" class="list-group-item">مکان بازدید روی نقشه<span class="pull-left fa fa-map" aria-hidden="true"></span></a>
@@ -42,6 +42,7 @@
             </div>
 
             @{Html.RenderAction("CurrentVisitor", "Home");}
+            @{Html.RenderAction("Subdetails", "Home");}
         </div>
         <div class="col-md-10">
 

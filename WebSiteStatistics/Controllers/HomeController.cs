@@ -284,6 +284,32 @@ namespace WebSiteStatistics.Controllers
             return PartialView("_CurrentVisitorPartial", Cv);
         }
 
+        public ActionResult Subdetails()
+        {
+            IList<Statistics> stat = new List<Statistics>();
+            using (var db = new AppDbContext())
+            {
+                stat = db.Statisticses.AsNoTracking().ToList();
+                
+            }
+
+            var subdetails=new SubDetailsViewModel
+            {
+
+                Today = stat.Count(d => d.DateStamp.Day == DateTime.Now.Day),
+                LastDay = stat.Count(d => d.DateStamp.Day == DateTime.Now.Day-1),
+                ThisMonth = stat.Count(m => m.DateStamp.Month == DateTime.Now.Month),
+                ThisYear = stat.Count(y=>y.DateStamp.Year==DateTime.Now.Year),
+                
+                
+
+            };
+
+
+
+            return PartialView("_SubDetailsPartial",subdetails);
+        }
+
         //Helpers
         public static string GetUserOS(string userAgent)
         {

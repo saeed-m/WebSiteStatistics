@@ -101,23 +101,35 @@
             $.connection.hub.logging = true;
             var onlineUsersHub = $.connection.onlineUsersHub;
             onlineUsersHub.client.updateUsersOnlineCount = function(count) {
+
+                var currentCount = $('#usersCount').text();
                 $('#usersCount').text(count);
-                if (count > 1) {
-                    $.noty.defaults.killer = true;
-                    noty({
-                        text: 'کاربر جدیدی وارد سایت شد!',
-                        layout: 'topLeft',
-                        theme: 'defaultTheme',
-                        closeWith: ['click', 'hover'],
-                        type: 'information'
-                    });
+                if (currentCount.length > 0) {
+                    if (currentCount > count) {
+                        $.noty.defaults.killer = true;
+                        noty({
+                            text: 'کاربر از سایت خارج شد!',
+                            layout: 'topLeft',
+                            theme: 'defaultTheme',
+                            closeWith: ['click', 'hover'],
+                            type: 'warning'
+                        });
+                    } else if (currentCount < count) {
+                        $.noty.defaults.killer = true;
+                        noty({
+                            text: 'کاربر جدیدی وارد سایت شد!',
+                            layout: 'topLeft',
+                            theme: 'defaultTheme',
+                            closeWith: ['click', 'hover'],
+                            type: 'information'
+                        });
+                    }
                 }
 
-            }
+
+            };
             $.connection.hub.start();
         });
-
-
     </script>
 
 

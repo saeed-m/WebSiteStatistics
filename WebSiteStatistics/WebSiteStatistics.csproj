@@ -169,6 +169,7 @@
     <Compile Include="Models\OsTableViewModel.cs" />
     <Compile Include="Models\ReferrerViewModel.cs" />
     <Compile Include="Models\StatisticsViewModel.cs" />
+    <Compile Include="Models\SubDetailsViewModel.cs" />
     <Compile Include="Models\UserOsViewModel.cs" />
     <Compile Include="Models\VectorMapViewModel.cs" />
     <Compile Include="Modules\StatModule.cs" />
@@ -500,6 +501,7 @@
     <Content Include="Views\Home\_CurrentVisitorPartial.cshtml" />
     <Content Include="Views\Home\VectorMap.cshtml" />
     <Content Include="Views\About\Index.cshtml" />
+    <Content Include="Views\Home\_SubDetailsPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
