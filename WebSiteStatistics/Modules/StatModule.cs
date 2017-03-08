@@ -50,7 +50,7 @@ namespace WebSiteStatistics.Modules
                 statistic.IpAddress = GetIPAddress();
                 statistic.UserOs = GetUserOS(context.Request.UserAgent);
                 statistic.PageViewed = context.Request.Url.AbsolutePath;
-                statistic.Referer = context.Request.UrlReferrer?.AbsoluteUri ?? "Direct";
+                statistic.Referer = context.Request.UrlReferrer?.ToString() ?? "Direct";
                 statistic.UserAgent = context.Request.Browser.Browser;
                 statistic.DateStamp = DateTime.Now;
                 using (var db = new AppDbContext())
