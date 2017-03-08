@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Mime;
+using System.Threading;
 using System.Web;
 using System.Web.SessionState;
 using System.Xml.Linq;
@@ -29,9 +30,20 @@ namespace WebSiteStatistics.Modules
             {
                 SessionStateModule stateModule = (SessionStateModule)module;
                 stateModule.Start += (Session_Start);
-                
             }
+            context.BeginRequest += new EventHandler(Application_BeginRequest);
         }
+
+        private void Application_BeginRequest(object sender, EventArgs e)
+        {
+           
+            var persianCulture = new PersianCulture();
+            Thread.CurrentThread.CurrentCulture = persianCulture;
+            Thread.CurrentThread.CurrentUICulture = persianCulture;
+
+
+        }
+
         protected void Session_Start(object sender, EventArgs e)
         {
             IList<BlockedIp> bi;
