@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Dynamic;
+using System.IO.IsolatedStorage;
 using System.Linq;
 using System.Net.Mime;
 using System.Web;
@@ -260,14 +261,83 @@ namespace WebSiteStatistics.Controllers
         public ActionResult Referrer()
         {
             var ur = new List<ReferrerViewModel>();
+            var st=new List<Statistics>();
             using (var db = new AppDbContext())
             {
-                ur.AddRange(db.Statisticses.GroupBy(r => new { r.Referer }).OrderByDescending(r => r.Count()).Select(r => new ReferrerViewModel() { ReferrerUrl = r.Key.Referer.Substring(0, 100), ReferrerCount = r.Count() }).ToList());
 
+                st = db.Statisticses.ToList();
             }
+            foreach (var statisticse in st)
+                {
+                    statisticse.Referer = GetHostName(statisticse.Referer);
+                }
+                ur.AddRange(st.GroupBy(
+                    r => new { r.Referer }).OrderByDescending(
+                    r => r.Count()).Select(r => new ReferrerViewModel()
+                    { ReferrerUrl = r.Key.Referer, ReferrerCount = r.Count() }).ToList());
+                //r.Key.Referer.Substring(0, 100)
+            
 
             return PartialView("_UserReferrerPartial", ur);
         }
+
+        public string GetHostName(string url)
+        {
+            if (url != "Direct")
+            {
+                Uri uri=new Uri(url);
+                return uri.Host;
+            }
+            else
+            {
+                return url;
+            }
+            
+        }
+
+        public ActionResult PageView()
+        {
+            var pv = new List<PageViewViewModel>();
+            var st = new List<Statistics>();
+            using (var db = new AppDbContext())
+            {
+                st = db.Statisticses.ToList();
+            }
+            foreach (var statisticse in st)
+            {
+                statisticse.PageViewed = NormalizePageName(statisticse.PageViewed);
+            }
+
+            pv.AddRange(st.GroupBy(
+                   r => new { r.PageViewed }).OrderByDescending(
+                   r => r.Count()).Select(r => new PageViewViewModel()
+                   { PageUrl = r.Key.PageViewed, PageViewCount = r.Count() }).ToList());
+
+
+
+            return PartialView("_PageViewPartial",pv);
+        }
+
+
+        /// <summary>
+        /// متدی برای نرمال سازی نام صفحات
+        /// </summary>
+        /// <param name="PageName">نام صفحه بازدید شده</param>
+        /// <returns>نرمال شده نام صفحه</returns>
+        public string NormalizePageName(string PageName)
+        {
+            if (PageName == "/")
+            {
+                return "Home/Index";
+            }
+            else
+            {
+                return PageName.Remove(0,1);
+            }
+
+
+        }
+
 
         public ActionResult CurrentVisitor()
         {
@@ -300,15 +370,20 @@ namespace WebSiteStatistics.Controllers
                 LastDay = stat.Count(d => d.DateStamp.Day == DateTime.Now.Day-1),
                 ThisMonth = stat.Count(m => m.DateStamp.Month == DateTime.Now.Month),
                 ThisYear = stat.Count(y=>y.DateStamp.Year==DateTime.Now.Year),
-                
-                
+                PeakDate = stat.GroupBy(x => x.DateStamp.ToShortDateString()).OrderByDescending(grouping => grouping.Count()).First().Key.AsDateTime(),
+                LowDate = stat.GroupBy(x => x.DateStamp.ToShortDateString()).OrderByDescending(grouping => grouping.Count()).Last().Key.AsDateTime(),
+
+
 
             };
 
-
+            //MostVisitedDate();
 
             return PartialView("_SubDetailsPartial",subdetails);
         }
+
+     
+
 
         //Helpers
         public static string GetUserOS(string userAgent)

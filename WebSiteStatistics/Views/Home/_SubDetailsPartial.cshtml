@@ -17,7 +17,7 @@
             </li>
             <li class="list-group-item">
                 بازدید امروز <span class="pull-left">@Model.Today</span>
-</li>
+            </li>
             <li class="list-group-item">
                 بازدید دیروز <span class="pull-left">@Model.LastDay</span>
             </li>
@@ -26,6 +26,36 @@
             </li>
             <li class="list-group-item">
                 بازدید امسال <span class="pull-left">@Model.ThisYear</span>
+            </li>
+          
+        </ul>
+        <hr/>
+        <ul class="list-group">
+            <li class="list-group-item">
+                <span>
+                    <span class="imgleft fa fa-arrow-circle-up" style="color: green" aria-hidden="true"></span>
+                    پر بازدید ترین روز
+                </span>
+
+                
+                <br/>
+                <span class="pull-left">@Model.PeakDate.ToString("yyyy/MM/dd")</span>
+                <br/>
+                <span class="pull-right">@Model.PeakDate.ToString("dddd,MM MMMM,yyyy")</span>
+                <br/>
+            </li>
+            <li class="list-group-item">
+
+                <span>
+                    <span class="imgleft fa fa-arrow-circle-down" style="color: red" aria-hidden="true"></span>
+                    کم بازدید ترین روز
+                </span>
+                
+                <br/>
+                <span class="pull-left">@Model.LowDate.ToString("yyyy/MM/dd")</span>
+                <br/>
+                <span class="pull-right">@Model.LowDate.ToString("dddd,MM MMMM,yyyy")</span>
+                <br/>
             </li>
 
         </ul>

@@ -1,0 +1,53 @@
+﻿@model List<WebSiteStatistics.Models.PageViewViewModel>
+
+
+
+<div class="col-md-12">
+    <div class="box">
+        <div class="box-header">
+            <span>
+                <span class="imgleft fa fa-eye" aria-hidden="true"></span>
+               صفحات مشاهده شده
+            </span>
+
+        </div>
+        <div class="box-content">
+            <div class="table-responsive">
+
+                <table class="table m-0">
+
+                    <tbody>
+
+                        @{
+                            foreach (var item in Model)
+                            {
+                                <tr>
+
+
+                                    <td><span class="badge">@item.PageViewCount</span></td>
+                                    <td><span class="referrerurl">@item.PageUrl</span></td>
+                                </tr>
+
+
+                            }
+
+
+                        }
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+
+        </div>
+    </div>
+
+
+
+
+
+</div>
+
+

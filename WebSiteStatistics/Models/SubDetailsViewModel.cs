@@ -11,6 +11,11 @@ namespace WebSiteStatistics.Models
         public int LastDay { get; set; }
         public int ThisMonth { get; set; }
         public int ThisYear { get; set; }
+        public DateTime PeakDate { get; set; }
+        public DateTime LowDate { get; set; }
+
+
+
 
 
 

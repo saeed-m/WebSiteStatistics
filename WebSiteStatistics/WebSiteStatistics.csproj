@@ -168,6 +168,7 @@
     <Compile Include="Models\CountryViewModel.cs" />
     <Compile Include="Models\CurrentVisitorViewModel.cs" />
     <Compile Include="Models\OsTableViewModel.cs" />
+    <Compile Include="Models\PageViewViewModel.cs" />
     <Compile Include="Models\ReferrerViewModel.cs" />
     <Compile Include="Models\StatisticsViewModel.cs" />
     <Compile Include="Models\SubDetailsViewModel.cs" />
@@ -505,6 +506,7 @@
     <Content Include="Views\Home\_SubDetailsPartial.cshtml" />
     <Content Include="Sound\in.ogg" />
     <Content Include="Sound\out.ogg" />
+    <Content Include="Views\Home\_PageViewPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

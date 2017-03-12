@@ -5,11 +5,11 @@ using System.Web;
 
 namespace WebSiteStatistics.Models
 {
-    public class ReferrerViewModel
+    public class PageViewViewModel
     {
+        public string PageUrl { get; set; }
+        public int PageViewCount { get; set; }
 
-        public string ReferrerUrl { get;set;}
-        public int ReferrerCount { get; set; }
 
     }
 }
