@@ -8,4 +8,4 @@ visits Statistics by browser usage <br/>
 visits Statistics by country on google map<br/>
 visits Statistics by referer<br/>
 and ...
-
+!["WebSiteStatistics demo Presentation"] (Cover.jpg "WebSiteStatistics demo Presentation")
