@@ -9,3 +9,5 @@ visits Statistics by country on google map<br/>
 visits Statistics by referer<br/>
 and ...
 !["WebSiteStatistics demo Presentation"] (Cover.jpg "WebSiteStatistics demo Presentation")
+!["WebSiteStatistics demo charts Presentation"] (Chart.jpg "WebSiteStatistics demo carts Presentation")
+!["WebSiteStatistics demo map Presentation"] (Map.jpg "WebSiteStatistics demo map Presentation")
