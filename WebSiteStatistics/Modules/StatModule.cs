@@ -55,7 +55,7 @@ namespace WebSiteStatistics.Modules
             System.Web.HttpContext context = System.Web.HttpContext.Current;
             //بررسی برای اینکه درخواست کننده موتور جستجوگر است ؟
             //و یا اینکه در لیست ای پی هایی است که نباید در آمار آورده شوند
-            if (!context.Request.Browser.Crawler || !bi.Any(ip => ip.IpAddress.Equals(GetIPAddress())))
+            if (!IsBotOrCrawler(context.Request.UserAgent) || !bi.Any(ip => ip.IpAddress.Equals(GetIPAddress())))
             {
 
                 var statistic = new Statistics();
@@ -125,6 +125,23 @@ namespace WebSiteStatistics.Modules
 
 
         #region
+        
+        //list of bots and crawlers
+        private static readonly List<string> KnownCrawlers = new List<string>
+        {
+            "bot","crawler","baiduspider","80legs","ia_archiver","ahrefsBot","twitterbot",
+            "yoozbot","yandexBot","bitlybot","other", "sogou web spider", "python requests",
+            "voyager","curl","wget","yahoo! slurp","mediapartners-google", "mj12bot",
+            "seznamBot", "Sogou web spider", "360Spider", "sogouwebspider"
+        };
+
+        //detect the crawlers and bots
+        public static bool IsBotOrCrawler(string agent)
+        {
+            agent = agent.ToLower();
+            return KnownCrawlers.Any(crawler => agent.Contains(crawler) || agent.Equals(crawler));
+        }
+        
         public static string GetUserOS(string userAgent)
         {
             // get a parser with the embedded regex patterns
